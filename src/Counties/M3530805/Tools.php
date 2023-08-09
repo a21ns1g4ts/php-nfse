@@ -4,7 +4,7 @@ namespace NFePHP\NFSe\Counties\M3530805;
 
 /**
  * Classe para a comunicação com os webservices da
- * Cidade de Governador Valadares MG
+ * Cidade de Mogi Mirim SP
  * conforme o modelo SIGISS
  *
  * @category  NFePHP
@@ -70,7 +70,7 @@ class Tools extends ToolsSIGISS
         'xmlns:xsd' => "http://www.w3.org/2001/XMLSchema",
         'xmlns:xsi' => "http://www.w3.org/2001/XMLSchemainstance", 
         'xmlns:SOAP-ENC' => 'http://schemas.xmlsoap.org/soap/encoding/', 
-        'xmlns:tns' => 'https://valadares.sigiss.com.br/valadares/ws/sigiss_ws.php?wsdl'
+        'xmlns:tns' => 'https://mogimirim.meumunicipio.online/abrasf/ws?wsdl'
     ];
 
     protected $params = [];
@@ -82,7 +82,7 @@ class Tools extends ToolsSIGISS
      */
     public function gerarNota($rps)
     {
-        $class = "NFePHP\\NFSe\\Counties\\M3530805\\v{$this->versao}\\GerarNota";
+        $class = "NFePHP\\NFSe\\Counties\\M3112701\\v{$this->versao}\\GerarNota";
         $fact = new $class($this->certificate);
 
         return $this->gerarNotaCommon($fact, $rps);
@@ -116,7 +116,7 @@ class Tools extends ToolsSIGISS
      */
     public function consultarRps($rps)
     {
-        $class = "NFePHP\\NFSe\\Counties\\M3530805\\v{$this->versao}\\ConsultarRps";
+        $class = "NFePHP\\NFSe\\Counties\\M3112701\\v{$this->versao}\\ConsultarRps";
         $fact = new $class($this->certificate);
         return $this->consultarRpsCommon($fact, $rps);
     }
@@ -141,7 +141,7 @@ class Tools extends ToolsSIGISS
      */
     public function consultarNfse($rps)
     {
-        $class = "NFePHP\\NFSe\\Counties\\M3530805\\v{$this->versao}\\ConsultarNfse";
+        $class = "NFePHP\\NFSe\\Counties\\M3112701\\v{$this->versao}\\ConsultarNfse";
         $fact = new $class($this->certificate);
         return $this->consultarNfseCommon($fact, $rps);
     }
@@ -168,7 +168,7 @@ class Tools extends ToolsSIGISS
      */
     public function ConsultarCadastro($rps, $cpfCnpjContribuinte)
     {
-        $class = "NFePHP\\NFSe\\Counties\\M3530805\\v{$this->versao}\\ConsultarCadastro";
+        $class = "NFePHP\\NFSe\\Counties\\M3112701\\v{$this->versao}\\ConsultarCadastro";
         $fact = new $class($this->certificate);
         return $this->ConsultarCadastroCommon($fact, $rps, $cpfCnpjContribuinte);
     }
@@ -221,11 +221,11 @@ class Tools extends ToolsSIGISS
             $messageText = $this->stringTransform($message);
         }
 
-        $request = '<tns:' . $this->method . ' xmlns:tns="https://valadares.sigiss.com.br/valadares/ws/sigiss_ws.php?wsdl">' . trim($messageText) . '</tns:' . $this->method . '>';
+        $request = '<tns:' . $this->method . ' xmlns:tns="https://mogimirim.meumunicipio.online/abrasf/ws?wsdl">' . trim($messageText) . '</tns:' . $this->method . '>';
 
         $this->params = array(
             "soapaction: '$url#" . $this->method . "'",
-            'Host: https://valadares.sigiss.com.br/testevaladares/ws/sigiss_ws.php?wsdl',
+            'Host: https://mogimirim.meumunicipio.online/abrasf/ws?wsdl',
             'Content-Type: text/xml; charset=ISO-8859-1'
         );
 
@@ -249,7 +249,7 @@ class Tools extends ToolsSIGISS
      */
     public function makeXml($rps)
     {
-        $class = "NFePHP\\NFSe\\Counties\\M3530805\\v{$this->versao}\\GerarNota";
+        $class = "NFePHP\\NFSe\\Counties\\M3112701\\v{$this->versao}\\GerarNota";
         $fact = new $class($this->certificate);
 
         $message = $fact->render(
@@ -277,7 +277,7 @@ class Tools extends ToolsSIGISS
 
     public function cancelarNfse($rps, $codCancelamento, $email = '')
     {
-        $class = "NFePHP\\NFSe\\Counties\\M3530805\\v{$this->versao}\\CancelarNota";
+        $class = "NFePHP\\NFSe\\Counties\\M3112701\\v{$this->versao}\\CancelarNota";
         $fact = new $class($this->certificate);
 
         return $this->cancelarNotaCommon($fact, $rps, $codCancelamento, $email);
