@@ -1,0 +1,9 @@
+Mogi Mirim SP
+https://mogimirim.sigiss.com.br/mogimirim/index.php
+IBGE: 3530805
+SIAF: 6717
+Padrão: SIGISS SigCorp
+SOAP Version: 1.1
+URL Homologação: https://testemogimirim.meumunicipio.online/abrasf/ws?wsdl
+URL Produção: https://mogimirim.meumunicipio.online/abrasf/ws?wsdl
+xmlns: https://mogimirim.meumunicipio.online/abrasf/ws?wsdl
