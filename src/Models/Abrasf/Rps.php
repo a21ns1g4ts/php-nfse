@@ -159,6 +159,10 @@ class Rps extends RpsBase
      */
     public $infIssRetido;
     /**
+     * @var int
+     */
+    public $infResponsavelRetencao;
+    /**
      * @var float
      */
     public $infValorIss;
