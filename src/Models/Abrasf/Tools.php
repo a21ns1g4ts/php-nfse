@@ -125,7 +125,7 @@ class Tools extends ToolsBase
         $action = '';
 
         //Realiza o request SOAP
-        $this->soap->send(
+        return $this->soap->send(
             $url,
             $this->method,
             $action,
@@ -134,8 +134,8 @@ class Tools extends ToolsBase
             $this->namespaces[$this->soapversion],
             $request
         );
-        $lastXml = $this->soap->__getLastRequest();
-        die(print_r(htmlspecialchars($lastXml), true));
+        //$lastXml = $this->soap->__getLastRequest();
+        //die(print_r(htmlspecialchars($lastXml), true));
     }
 
     /**
