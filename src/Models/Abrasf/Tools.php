@@ -126,6 +126,7 @@ class Tools extends ToolsBase
 
         //Realiza o request SOAP
         $this->soap->setDebugMode(true);
+        die(print_r($this->soap, true));
         return $this->soap->send(
             $url,
             $this->method,
