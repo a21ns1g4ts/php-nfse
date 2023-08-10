@@ -116,10 +116,10 @@ class Tools extends ToolsBase
         }
         $request = $this->makeRequest($messageText);
         if (!count($this->params)) {
-            /*$this->params = [
+            $this->params = [
                 "Content-Type: text/xml;charset=utf-8;",
                 "SOAPAction: \"http://www.e-governeapps2.com.br/{$this->method}\""
-            ];*/
+            ];
         }
 
         $action = '';
@@ -171,13 +171,11 @@ class Tools extends ToolsBase
                     "<nfse:{$this->method}>"
                     . "<nfseCabecMsg>"
                     . "<![CDATA["
-                    . "<cabecalho xmlns=\"" . $this->xmlns . "\" versao=\"" . $versao . "\"><versaoDados>" . $versao . "</versaoDados></cabecalho>"
+                    . "<cabecalho xmlns=\"{$this->xmlns}\" versao=\"{$versao}\"><versaoDados>{$versao}</versaoDados></cabecalho>"
                     . "]]>"
                     . "</nfseCabecMsg>"
                     . "<nfseDadosMsg>"
-                    . "<![CDATA["
-                    . $message
-                    . "]]>"
+                    . "<![CDATA[{$message}]]>"
                     . "</nfseDadosMsg>"
                     . "</nfse:{$this->method}>";
                 break;
