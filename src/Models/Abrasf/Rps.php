@@ -209,6 +209,10 @@ class Rps extends RpsBase
     /**
      * @var string
      */
+    public $infCodigoPais;
+    /**
+     * @var string
+     */
     public $infDiscriminacao;
     /**
      * @var int
