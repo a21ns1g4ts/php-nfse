@@ -116,10 +116,10 @@ class Tools extends ToolsBase
         }
         $request = $this->makeRequest($messageText);
         if (!count($this->params)) {
-            $this->params = [
+            /*$this->params = [
                 "Content-Type: text/xml;charset=utf-8;",
                 "SOAPAction: \"http://www.e-governeapps2.com.br/{$this->method}\""
-            ];
+            ];*/
         }
 
         $action = '';
@@ -142,7 +142,7 @@ class Tools extends ToolsBase
      */
     protected function makeRequest($message)
     {
-        $versao = '2.04';
+        $versao = '2.02';
         switch ($this->versao) {
             case 100:
                 $request = "<{$this->method} xmlns=\"http://www.e-governeapps2.com.br/\">"
@@ -166,6 +166,7 @@ class Tools extends ToolsBase
                     . "</nfseDadosMsg>"
                     . "</e:{$this->method}>";
             case 204:
+                $versao = '2.04';
                 $request =
                     "<nfse:{$this->method}>"
                     . "<nfseCabecMsg>"
