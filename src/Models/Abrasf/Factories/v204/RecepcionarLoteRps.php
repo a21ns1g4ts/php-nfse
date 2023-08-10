@@ -57,15 +57,21 @@ class RecepcionarLoteRps extends RecepcionarLoteRpsBase
 
         //Cria os dados do prestador
         $prestador = $dom->createElement('Prestador');
-        //Cria a tag de CpfCnpj do prestador
+        /* CPF CNPJ */
         $cpfCnpj = $dom->createElement('CpfCnpj');
-        //Adiciona o Cnpj na tag CpfCnpj
+
+        if ($remetenteTipoDoc == '2') {
+            $tag = 'Cnpj';
+        } else {
+            $tag = 'Cpf';
+        }
+        //Adiciona o Cpf/Cnpj na tag CpfCnpj
         $dom->addChild(
             $cpfCnpj,
-            'Cnpj',
-            $cnpj,
+            $tag,
+            $remetenteCNPJCPF,
             true,
-            "CNPJ",
+            "Cpf / Cnpj",
             true
         );
         //Adiciona a tag CpfCnpj na tag Prestador
