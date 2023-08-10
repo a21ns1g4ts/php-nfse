@@ -142,7 +142,7 @@ class Tools extends ToolsBase
      */
     protected function makeRequest($message)
     {
-        $versao = '2.02';
+        $versao = '2.04';
         switch ($this->versao) {
             case 100:
                 $request = "<{$this->method} xmlns=\"http://www.e-governeapps2.com.br/\">"
@@ -167,7 +167,7 @@ class Tools extends ToolsBase
                     . "</e:{$this->method}>";
             case 204:
                 $request =
-                    "<e:{$this->method}>"
+                    "<nfse:{$this->method}>"
                     . "<nfseCabecMsg>"
                     . "<![CDATA["
                     . "<cabecalho xmlns=\"{$this->xmlns}\" versao=\"{$versao}\"><versaoDados>{$versao}</versaoDados></cabecalho>"
@@ -178,7 +178,7 @@ class Tools extends ToolsBase
                     . $message
                     . "]]>"
                     . "</nfseDadosMsg>"
-                    . "</e:{$this->method}>";
+                    . "</nfse:{$this->method}>";
                 break;
             default:
                 throw new \LogicException('Versão não suportada');
