@@ -165,6 +165,10 @@ class Rps extends RpsBase
     /**
      * @var float
      */
+    public $infTotTributacao;
+    /**
+     * @var float
+     */
     public $infValorIssRetido;
     /**
      * @var float
@@ -678,6 +682,17 @@ class Rps extends RpsBase
             throw new \InvalidArgumentException($msg);
         }
         $this->infValorIss = round($value, 2);
+    }
+
+    /**
+     * Set amount of Tributacao
+     * @param float $value
+     * @param string $campo - String com o nome do campo caso queira mostrar na mensagem de validação
+     * @throws InvalidArgumentException
+     */
+    public function valorTotalTributacao($value = 0.00)
+    {
+        $this->infTotTributacao = round($value, 2);
     }
 
     /**
