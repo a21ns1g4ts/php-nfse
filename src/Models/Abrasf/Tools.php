@@ -170,7 +170,7 @@ class Tools extends ToolsBase
                     "<nfse:{$this->method}>"
                     . "<nfseCabecMsg>"
                     . "<![CDATA["
-                    . "<cabecalho xmlns=\"{$this->xmlns}\" versao=\"{$versao}\"><versaoDados>{$versao}</versaoDados></cabecalho>"
+                    . "<cabecalho xmlns=\"" . $this->xmlns . "\" versao=\"" . $versao . "\"><versaoDados>" . $versao . "</versaoDados></cabecalho>"
                     . "]]>"
                     . "</nfseCabecMsg>"
                     . "<nfseDadosMsg>"
