@@ -38,7 +38,7 @@ class Tools extends ToolsBase
      * Soap Version
      * @var int
      */
-    protected $soapversion = SOAP_1_2;
+    protected $soapversion = SOAP_1_1;
 
     /**
      * Soap Action
