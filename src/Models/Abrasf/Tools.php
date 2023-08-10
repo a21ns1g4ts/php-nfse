@@ -398,9 +398,9 @@ class Tools extends ToolsBase
             $rpss
         );
 
-        // @header ("Content-Disposition: attachment; filename=\"NFSe_Lote.xml\"" );
-        // echo $message;
-        // exit;
+         @header ("Content-Disposition: attachment; filename=\"NFSe_Lote.xml\"" );
+         echo $message;
+         exit;
         return $this->sendRequest($url, $message);
     }
 
