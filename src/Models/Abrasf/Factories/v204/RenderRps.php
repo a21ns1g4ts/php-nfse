@@ -655,14 +655,6 @@ class RenderRps extends RenderRPSBase
             'IncentivoFiscal',
             false
         );
-        self::$dom->addChild(
-            $infRPS,
-            'InformacoesComplementares',
-            $rps->infInformacoesComplementares,
-            true,
-            'InformacoesComplementares',
-            false
-        );
 
         self::$dom->appChild($root, $infRPS, 'Adicionando tag infRPS em RPS');
         self::$dom->appChild($parent, $root, 'Adicionando tag RPS na ListaRps');
