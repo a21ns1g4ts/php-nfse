@@ -335,14 +335,6 @@ class RenderRps extends RenderRPSBase
         );  
         self::$dom->addChild(
             $servico,
-            'CodigoTributacaoMunicipio',
-            $rps->infCodigoTributacaoMunicipio,
-            false,
-            'CodigoTributacaoMunicipio',
-            false
-        );          
-        self::$dom->addChild(
-            $servico,
             'CodigoPais',
             $rps->infCodigoPais,
             false,

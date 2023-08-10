@@ -780,8 +780,6 @@
 				minOccurs="1" maxOccurs="1" />
 		<xsd:element name="CodigoMunicipio" type="tsCodigoMunicipioIbge"
 				minOccurs="1" maxOccurs="1" />
-		<xsd:element name="CodigoTributacaoMunicipio" type="tsCodigoTributacaoMunicipioIbge"
-				minOccurs="1" maxOccurs="1" />
 		<xsd:element name="CodigoPais" type="tsCodigoPaisBacen"
 				minOccurs="0" maxOccurs="1" />
 		<xsd:element name="ExigibilidadeISS" type="tsExigibilidadeISS"
