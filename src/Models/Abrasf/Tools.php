@@ -92,6 +92,7 @@ class Tools extends ToolsBase
      */
     protected function sendRequest($url, $message)
     {
+        die('testando');
         $this->xmlRequest = $message;
         
         //Abrasf possui apenas uma URL
@@ -134,8 +135,6 @@ class Tools extends ToolsBase
             $this->namespaces[$this->soapversion],
             $request
         );
-        //$lastXml = $this->soap->__getLastRequest();
-        //die(print_r(htmlspecialchars($lastXml), true));
     }
 
     /**
