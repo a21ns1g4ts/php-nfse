@@ -835,7 +835,7 @@
 				minOccurs="1" maxOccurs="1" />
 		<xsd:element name="Prestador" type="tcIdentificacaoPrestador"
 				minOccurs="1" maxOccurs="1" />
-		<xsd:element name="Tomador" type="tcDadosTomador"
+		<xsd:element name="TomadorServico" type="tcDadosTomador"
 				minOccurs="0" maxOccurs="1" />
 		<xsd:element name="Intermediario" type="tcDadosIntermediario"
 				minOccurs="0" maxOccurs="1" />
