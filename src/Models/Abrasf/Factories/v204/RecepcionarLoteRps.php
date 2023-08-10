@@ -55,10 +55,7 @@ class RecepcionarLoteRps extends RecepcionarLoteRpsBase
             true
         );
 
-        //Cria os dados do prestador
-        $prestador = $dom->createElement('Prestador');
-
-        //Cria a tag de CpfCnpj do prestador
+        /* CPF CNPJ */
         $cpfCnpj = $dom->createElement('CpfCnpj');
 
         if ($remetenteTipoDoc == '2') {
@@ -75,21 +72,17 @@ class RecepcionarLoteRps extends RecepcionarLoteRpsBase
             "Cpf / Cnpj",
             true
         );
-        //Adiciona a tag CpfCnpj na tag Prestador
-        $dom->appChild($prestador, $cpfCnpj, 'Adicionando tag CpfCnpj ao Prestador');
+        $dom->appChild($loteRps, $cpfCnpj, 'Adicionando tag CpfCnpj ao Prestador');
 
         /* Inscrição Municipal */
         $dom->addChild(
-            $prestador,
+            $loteRps,
             'InscricaoMunicipal',
             $inscricaoMunicipal,
             false,
             "Inscricao Municipal",
             false
         );
-
-        //Adiciona a tag Prestador a consulta
-        $dom->appChild($root, $prestador, 'Adicionando tag Prestador');
 
         /* Quantidade de RPSs */
         $dom->addChild(
