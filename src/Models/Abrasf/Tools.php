@@ -123,7 +123,6 @@ class Tools extends ToolsBase
         }
 
         $action = '';
-        die('okkk');
 
         //Realiza o request SOAP
         return $this->soap->send(
