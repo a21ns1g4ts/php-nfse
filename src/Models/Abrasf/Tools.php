@@ -175,7 +175,9 @@ class Tools extends ToolsBase
                     . "]]>"
                     . "</nfseCabecMsg>"
                     . "<nfseDadosMsg>"
-                    . "<![CDATA[{$message}]]>"
+                    . "<![CDATA["
+                    . $message
+                    . "]]>"
                     . "</nfseDadosMsg>"
                     . "</nfse:{$this->method}>";
                 break;
