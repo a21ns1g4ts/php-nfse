@@ -165,6 +165,20 @@ class Tools extends ToolsBase
                     . "]]>"
                     . "</nfseDadosMsg>"
                     . "</e:{$this->method}>";
+            case 204:
+                $request =
+                    "<e:{$this->method}>"
+                    . "<nfseCabecMsg>"
+                    . "<![CDATA["
+                    . "<cabecalho xmlns=\"{$this->xmlns}\" versao=\"{$versao}\"><versaoDados>{$versao}</versaoDados></cabecalho>"
+                    . "]]>"
+                    . "</nfseCabecMsg>"
+                    . "<nfseDadosMsg>"
+                    . "<![CDATA["
+                    . $message
+                    . "]]>"
+                    . "</nfseDadosMsg>"
+                    . "</e:{$this->method}>";
                 break;
             default:
                 throw new \LogicException('Versão não suportada');
