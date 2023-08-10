@@ -17,7 +17,7 @@ namespace NFePHP\NFSe\Counties\M3530805;
  * @link      http://github.com/nfephp-org/sped-nfse for the canonical source repository
  */
 
-use NFePHP\NFSe\Models\Simpliss\Rps as RpsModel;
+use NFePHP\NFSe\Models\Abrasf\Rps as RpsModel;
 
 class Rps extends RpsModel
 {
