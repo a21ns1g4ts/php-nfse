@@ -27,8 +27,8 @@ class Tools extends ToolsAbrasf
      * @var array
      */
     protected $url = [
-        1 => 'https://mogimirim.meumunicipio.online/abrasf/ws?wsdl',
-        2 => 'https://testemogimirim.meumunicipio.online/abrasf/ws?wsdl'
+        1 => 'https://mogimirim.meumunicipio.online/abrasf/ws',
+        2 => 'https://testemogimirim.meumunicipio.online/abrasf/ws'
     ];
     /**
      * County Namespace
