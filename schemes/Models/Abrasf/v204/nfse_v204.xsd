@@ -993,10 +993,8 @@
 	<xsd:sequence>
 		<xsd:element name="NumeroLote" type="tsNumeroLote"
 				minOccurs="1" maxOccurs="1" />
-		<xsd:element name="CpfCnpj" type="tcCpfCnpj" minOccurs="1"
+		<xsd:element name="Prestador" type="tcIdentificacaoPrestador" minOccurs="1"
 				maxOccurs="1" />
-		<xsd:element name="InscricaoMunicipal" type="tsInscricaoMunicipal"
-				minOccurs="0" maxOccurs="1" />
 		<xsd:element name="QuantidadeRps" type="tsQuantidadeRps"
 				minOccurs="1" maxOccurs="1" />
 		<xsd:element name="ListaRps" minOccurs="1" maxOccurs="1">

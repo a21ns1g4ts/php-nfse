@@ -55,34 +55,34 @@ class RecepcionarLoteRps extends RecepcionarLoteRpsBase
             true
         );
 
-        /* CPF CNPJ */
+        //Cria os dados do prestador
+        $prestador = $dom->createElement('Prestador');
+        //Cria a tag de CpfCnpj do prestador
         $cpfCnpj = $dom->createElement('CpfCnpj');
-
-        if ($remetenteTipoDoc == '2') {
-            $tag = 'Cnpj';
-        } else {
-            $tag = 'Cpf';
-        }
-        //Adiciona o Cpf/Cnpj na tag CpfCnpj
+        //Adiciona o Cnpj na tag CpfCnpj
         $dom->addChild(
             $cpfCnpj,
-            $tag,
-            $remetenteCNPJCPF,
+            'Cnpj',
+            $cnpj,
             true,
-            "Cpf / Cnpj",
+            "CNPJ",
             true
         );
-        $dom->appChild($loteRps, $cpfCnpj, 'Adicionando tag CpfCnpj ao Prestador');
+        //Adiciona a tag CpfCnpj na tag Prestador
+        $dom->appChild($prestador, $cpfCnpj, 'Adicionando tag CpfCnpj ao Prestador');
 
         /* Inscrição Municipal */
         $dom->addChild(
-            $loteRps,
+            $prestador,
             'InscricaoMunicipal',
             $inscricaoMunicipal,
             false,
             "Inscricao Municipal",
             false
         );
+        
+        //Adiciona a tag Prestador a consulta
+        $dom->appChild($root, $prestador, 'Adicionando tag Prestador');
 
         /* Quantidade de RPSs */
         $dom->addChild(
