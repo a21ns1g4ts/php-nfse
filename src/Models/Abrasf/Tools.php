@@ -183,8 +183,8 @@ class Tools extends ToolsBase
             default:
                 throw new \LogicException('Versão não suportada');
         }
-        header("Content-type: text/xml");
-        //die(print_r(htmlspecialchars($request, ENT_QUOTES), true));
+        //header("Content-type: text/xml");
+        die(print_r(htmlspecialchars($request, ENT_QUOTES), true));
         return $request;
     }
 
