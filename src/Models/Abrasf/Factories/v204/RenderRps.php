@@ -408,9 +408,9 @@ class RenderRps extends RenderRPSBase
         self::$dom->appChild($infRPS, $prestador, 'Adicionando tag Prestador em infRPS');
         /** FIM Prestador **/
 
-        /** Tomador **/
+        /** Tomador Serviço **/
         if (!empty($rps->infTomador['razao'])) {
-            $tomador = self::$dom->createElement('Tomador');
+            $tomador = self::$dom->createElement('TomadorServico');
 
             //Identificação Tomador
             if (!empty($rps->infTomador['cnpjcpf'])) {
