@@ -44,7 +44,7 @@ class Tools extends ToolsBase
      * Soap Action
      * @var string
      */
-    protected $soapAction = "https://testemogimirimabrasf.meumunicipio.online/ws/nfse#GerarNfse";
+    protected $soapAction = "https://testemogimirimabrasf.meumunicipio.online/ws/nfse";
 
     /**
      * SIAFI County Cod
