@@ -69,11 +69,8 @@ class Tools extends ToolsBase
      */
     protected $namespaces = [
         1 => [
-            'xmlns:soap12' => "http://schemas.xmlsoap.org/soap/envelope/",
-            'xmlns:sis' => 'http://www.sistema.com.br/Sistema.Ws.Nfse',
-            'xmlns:nfse'    => "http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd",
-            'xmlns:xd' => 'http://www.w3.org/2000/09/xmldsig#',
-            'xmlns:sis1'    => 'xmlns:sis1="">'
+            'xmlns:soapenv' => "http://schemas.xmlsoap.org/soap/envelope/",
+            'xmlns:nfse'    => "https://mogimirim.meumunicipio.online/ws/nfse"
         ],
         2 => [
             'xmlns:soapenv' => "http://schemas.xmlsoap.org/soap/envelope/",
