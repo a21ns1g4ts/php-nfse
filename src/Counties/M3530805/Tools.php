@@ -5,7 +5,7 @@ namespace NFePHP\NFSe\Counties\M3530805;
 /**
  * Classe para a comunicação com os webservices da
  * Mogi Mirim - SP
- * conforme o modelo Abrasf Simpliss 2.04
+ * conforme o modelo Abrasf 2.04
  *
  * @category  NFePHP
  * @package   NFePHP\NFSe\Counties\M3530805\Tools
@@ -17,7 +17,7 @@ namespace NFePHP\NFSe\Counties\M3530805;
  * @link      http://github.com/nfephp-org/sped-nfse for the canonical source repository
  */
 
-use NFePHP\NFSe\Models\Simpliss\Tools as ToolsBase;
+use NFePHP\NFSe\Models\Abrasf\Tools as ToolsBase;
 
 class Tools extends ToolsBase
 {
