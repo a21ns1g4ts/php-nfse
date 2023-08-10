@@ -1,6 +1,6 @@
 <?php
 
-namespace NFePHP\NFSe\Counties\M3530805\v300;
+namespace NFePHP\NFSe\Models\Abrasf\Factories\v204;
 
 use NFePHP\NFSe\Models\Abrasf\Factories\Factory;
 

@@ -5,7 +5,7 @@ namespace NFePHP\NFSe\Counties\M3530805;
 /**
  * Classe a construção do xml da NFSe
  * para a Cidade de Mogi Mirim - SP
- * conforme o modelo ABRASF
+ * conforme o modelo ABRASF Simpliss
  *
  * @category  NFePHP
  * @package   NFePHP\NFSe\Counties\M3530805\Convert
@@ -17,8 +17,8 @@ namespace NFePHP\NFSe\Counties\M3530805;
  * @link      http://github.com/nfephp-org/sped-nfse for the canonical source repository
  */
 
-use NFePHP\NFSe\Models\Abrasf\Convert as ConvertAbrasf;
+use NFePHP\NFSe\Models\Simpliss\Convert as ConvertSimpliss;
 
-class Convert extends ConvertAbrasf
+class Convert extends ConvertSimpliss
 {
 }

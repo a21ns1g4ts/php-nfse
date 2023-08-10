@@ -1,8 +1,8 @@
 <?php
 
-namespace NFePHP\NFSe\Counties\M3530805\v300;
+namespace NFePHP\NFSe\Models\Abrasf\Factories\v204;
 
-use NFePHP\NFSe\Common\DOMImproved as Dom;
+use NFePHP\Common\DOMImproved as Dom;
 use NFePHP\NFSe\Models\Abrasf\Factories\RecepcionarLoteRps as RecepcionarLoteRpsBase;
 use NFePHP\NFSe\Models\Abrasf\Factories\Signer;
 
@@ -27,7 +27,7 @@ class RecepcionarLoteRps extends RecepcionarLoteRpsBase
         $rpss
     ) {
         $method = 'EnviarLoteRpsEnvio';
-        $xsd = "servico_enviar_lote_rps_envio_v03";
+        $xsd = "nfse_v{$versao}";
         $qtdRps = count($rpss);
 
 
@@ -35,16 +35,16 @@ class RecepcionarLoteRps extends RecepcionarLoteRpsBase
         $dom->formatOutput = false;
         //Cria o elemento pai
         $root = $dom->createElement('EnviarLoteRpsEnvio');
-        $root->setAttribute('xmlns', "http://nfe.sjp.pr.gov.br/$xsd.xsd");
+        $root->setAttribute('xmlns', $this->xmlns);
 
         //Adiciona as tags ao DOM
         $dom->appendChild($root);
 
         $loteRps = $dom->createElement('LoteRps');
         $loteRps->setAttribute('Id', "lote{$lote}");
+        $loteRps->setAttribute('versao', '2.04');
 
         $dom->appChild($root, $loteRps, 'Adicionando tag LoteRps a EnviarLoteRpsEnvio');
-
 
         $dom->addChild(
             $loteRps,
@@ -52,30 +52,44 @@ class RecepcionarLoteRps extends RecepcionarLoteRpsBase
             $lote,
             true,
             "Numero do lote RPS",
-            true,
-            [['attr' => 'xmlns', 'value' => 'http://nfe.sjp.pr.gov.br/tipos_v03.xsd']]
+            true
         );
 
+        //Cria os dados do prestador
+        $prestador = $dom->createElement('Prestador');
+
+        //Cria a tag de CpfCnpj do prestador
+        $cpfCnpj = $dom->createElement('CpfCnpj');
+
+        if ($remetenteTipoDoc == '2') {
+            $tag = 'Cnpj';
+        } else {
+            $tag = 'Cpf';
+        }
+        //Adiciona o Cpf/Cnpj na tag CpfCnpj
         $dom->addChild(
-            $loteRps,
-            'Cnpj',
+            $cpfCnpj,
+            $tag,
             $remetenteCNPJCPF,
             true,
-            "Cnpj",
-            true,
-            [['attr' => 'xmlns', 'value' => 'http://nfe.sjp.pr.gov.br/tipos_v03.xsd']]
+            "Cpf / Cnpj",
+            true
         );
+        //Adiciona a tag CpfCnpj na tag Prestador
+        $dom->appChild($prestador, $cpfCnpj, 'Adicionando tag CpfCnpj ao Prestador');
 
         /* Inscrição Municipal */
         $dom->addChild(
-            $loteRps,
+            $prestador,
             'InscricaoMunicipal',
             $inscricaoMunicipal,
             false,
             "Inscricao Municipal",
-            false,
-            [['attr' => 'xmlns', 'value' => 'http://nfe.sjp.pr.gov.br/tipos_v03.xsd']]
+            false
         );
+
+        //Adiciona a tag Prestador a consulta
+        $dom->appChild($root, $prestador, 'Adicionando tag Prestador');
 
         /* Quantidade de RPSs */
         $dom->addChild(
@@ -84,15 +98,13 @@ class RecepcionarLoteRps extends RecepcionarLoteRpsBase
             $qtdRps,
             true,
             "Quantidade de Rps",
-            true,
-            [['attr' => 'xmlns', 'value' => 'http://nfe.sjp.pr.gov.br/tipos_v03.xsd']]
+            true
         );
 
         /* Lista de RPS */
         $listaRps = $dom->createElement('ListaRps');
-        $listaRps->setAttribute('xmlns', 'http://nfe.sjp.pr.gov.br/tipos_v03.xsd');
         $dom->appChild($loteRps, $listaRps, 'Adicionando tag ListaRps a LoteRps');
- 
+
         foreach ($rpss as $rps) {
             RenderRps::appendRps($rps, $this->timezone, $this->certificate, $this->algorithm, $dom, $listaRps);
         }
@@ -112,8 +124,8 @@ class RecepcionarLoteRps extends RecepcionarLoteRpsBase
             true
         );
         $body = $this->clear($body);
-        #echo '<pre>'.print_r($body).'</pre>';die;
-        $this->validar($versao, $body, $this->schemeFolder . "/SJP", $xsd, '');
+        $this->validar($versao, $body, $this->schemeFolder, $xsd, '');
+
         return $body;
     }
 }

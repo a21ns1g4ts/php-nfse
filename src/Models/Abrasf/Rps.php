@@ -111,6 +111,10 @@ class Rps extends RpsBase
      */
     public $infIncentivadorCultural;
     /**
+     * @var string
+     */
+    public $infInformacoesComplementares;
+    /**
      * @var int
      */
     public $infStatus;
@@ -423,6 +427,17 @@ class Rps extends RpsBase
             throw new \InvalidArgumentException($msg);
         }
         $this->infIncentivadorCultural = $value;
+    }
+
+    /**
+     * Set informacoes complementares
+     * @param string $value
+     * @param string $campo - String com o nome do campo caso queira mostrar na mensagem de validação
+     * @throws InvalidArgumentException
+     */
+    public function informacoesComplementares($value)
+    {
+        $this->infInformacoesComplementares = $value;
     }
 
     /**

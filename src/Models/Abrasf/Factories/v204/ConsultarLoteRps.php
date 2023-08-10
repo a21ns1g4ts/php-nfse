@@ -1,58 +1,56 @@
 <?php
 
-namespace NFePHP\NFSe\Counties\M3530805\v300;
+namespace NFePHP\NFSe\Models\Abrasf\Factories\v204;
 
 use NFePHP\Common\DOMImproved as Dom;
-use NFePHP\NFSe\Models\Abrasf\Factories\Factory;
+use NFePHP\NFSe\Models\Abrasf\Factories\ConsultarLoteRps as ConsultarLoteRpsBase;
 
-class ConsultarLoteRps extends Factory
+class ConsultarLoteRps extends ConsultarLoteRpsBase
 {
     protected $xmlns = 'http://www.abrasf.org.br/nfse.xsd';
 
     /**
      * Método usado para gerar o XML do Soap Request
-     * @param $versao
      * @param $cnpj
-     * @param $im
+     * @param $inscricaoMunicipal
      * @param $protocolo
      * @return mixed
      */
     public function render(
-        $versao,
         $cnpj,
-        $im,
+        $inscricaoMunicipal,
         $protocolo
     ) {
-        $xsd = "servico_consultar_lote_rps_envio_v03";
         $dom = new Dom('1.0', 'utf-8');
         //Cria o elemento pai
         $root = $dom->createElement('ConsultarLoteRpsEnvio');
         //Atribui o namespace
-        $root->setAttribute('xmlns', "http://nfe.sjp.pr.gov.br/$xsd.xsd");
-        $root->setAttribute('Id', "consultar");
+        $root->setAttribute('xmlns', $this->xmlns);
 
         //Cria os dados do prestador
         $prestador = $dom->createElement('Prestador');
-        $prestador->setAttribute('xmlns:tipos', "http://nfe.sjp.pr.gov.br/tipos_v03.xsd");
-        
-        //Adiciona o Cnpj na tag tipos:Cnpj
+        //Cria a tag de CpfCnpj do prestador
+        $cpfCnpj = $dom->createElement('CpfCnpj');
+        //Adiciona o Cnpj na tag CpfCnpj
         $dom->addChild(
-            $prestador,
-            'tipos:Cnpj',
+            $cpfCnpj,
+            'Cnpj',
             $cnpj,
             true,
-            "tipos:Cnpj",
+            "CNPJ",
             true
         );
+        //Adiciona a tag CpfCnpj na tag Prestador
+        $dom->appChild($prestador, $cpfCnpj, 'Adicionando tag CpfCnpj ao Prestador');
 
-        //Adiciona a InscricaoMunicipal na tag tipos:InscricaoMunicipal
+        /* Inscrição Municipal */
         $dom->addChild(
             $prestador,
-            'tipos:InscricaoMunicipal',
-            $im,
-            true,
-            "tipos:InscricaoMunicipal",
-            true
+            'InscricaoMunicipal',
+            $inscricaoMunicipal,
+            false,
+            "Inscricao Municipal",
+            false
         );
         
         //Adiciona a tag Prestador a consulta
@@ -71,8 +69,8 @@ class ConsultarLoteRps extends Factory
         //Adiciona as tags ao DOM
         $dom->appendChild($root);
         //Parse para XML
-        $body = str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $dom->saveXML());
-        $this->validar($versao, $body, "Abrasf/SJP", $xsd, '');
-        return $body;
+        $xml = str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $dom->saveXML());
+
+        return $xml;
     }
 }

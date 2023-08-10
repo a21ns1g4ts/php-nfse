@@ -1,6 +1,6 @@
 <?php
 
-namespace NFePHP\NFSe\Counties\M3530805\v300;
+namespace NFePHP\NFSe\Models\Abrasf\Factories\v204;
 
 /**
  * Classe para a renderização dos RPS em XML
@@ -71,11 +71,16 @@ class RenderRps extends RenderRPSBase
         self::$dom = $dom;
         $root = self::$dom->createElement('Rps');
 
-        $infRPS = self::$dom->createElement("InfRps");
-        $infRPS->setAttribute('Id', "{$rps->infNumero}");
+        $infRPS = self::$dom->createElement("InfDeclaracaoPrestacaoServico");
+        $infRPS->setAttribute('Id', "infRPS{$rps->infNumero}");
+
+        /** RPS Filha **/
+        $rpsInf = self::$dom->createElement('Rps');
+        $rpsInf->setAttribute('Id', "rpsInf{$rps->infNumero}");
 
         //Identificação RPS
         $identificacaoRps = self::$dom->createElement('IdentificacaoRps');
+
 
         $rps->infDataEmissao->setTimezone(self::$timezone);
 
@@ -103,52 +108,20 @@ class RenderRps extends RenderRPSBase
             "Tipo do RPS",
             false
         );
-        self::$dom->appChild($infRPS, $identificacaoRps, 'Adicionando tag IdentificacaoRPS');
+        self::$dom->appChild($rpsInf, $identificacaoRps, 'Adicionando tag IdentificacaoRPS');
         //FIM Identificação RPS
 
         self::$dom->addChild(
-            $infRPS,
+            $rpsInf,
             'DataEmissao',
-            $rps->infDataEmissao->format('Y-m-d\TH:i:s'),
+            $rps->infDataEmissao->format('Y-m-d'),
             true,
             'Data de Emissão do RPS',
             false
         );
+
         self::$dom->addChild(
-            $infRPS,
-            'NaturezaOperacao',
-            $rps->infNaturezaOperacao,
-            false,
-            'NaturezaOperacao',
-            false
-        );
-        self::$dom->addChild(
-            $infRPS,
-            'RegimeEspecialTributacao',
-            $rps->infRegimeEspecialTributacao,
-            false,
-            'RegimeEspecialTributacao',
-            false
-        );
-        self::$dom->addChild(
-            $infRPS,
-            'OptanteSimplesNacional',
-            $rps->infOptanteSimplesNacional,
-            true,
-            'OptanteSimplesNacional',
-            false
-        );
-        self::$dom->addChild(
-            $infRPS,
-            'IncentivadorCultural',
-            $rps->infIncentivadorCultural,
-            true,
-            'IncentivadorCultural',
-            false
-        );
-    
-        self::$dom->addChild(
-            $infRPS,
+            $rpsInf,
             'Status',
             $rps->infStatus,
             true,
@@ -183,8 +156,20 @@ class RenderRps extends RenderRPSBase
                 'tipo',
                 false
             );
-            self::$dom->appChild($infRPS, $rpssubs, 'Adicionando tag RpsSubstituido em infRps');
+            self::$dom->appChild($rpsInf, $rpssubs, 'Adicionando tag RpsSubstituido em infRps');
         }
+
+        self::$dom->appChild($infRPS, $rpsInf, 'Adicionando tag Rps');
+        /** FIM RPS Filha **/
+
+        self::$dom->addChild(
+            $infRPS,
+            'Competencia',
+            $rps->infDataEmissao->format('Y-m-d'),
+            true,
+            'Competencia Emissão do RPS',
+            false
+        );
 
         /** Serviços **/
         $servico = self::$dom->createElement('Servico');
@@ -249,12 +234,22 @@ class RenderRps extends RenderRPSBase
         );
         self::$dom->addChild(
             $valores,
-            'IssRetido',
-            $rps->infIssRetido,
+            'OutrasRetencoes',
+            $rps->infOutrasRetencoes,
             false,
-            'IssRetido',
+            'OutrasRetencoes',
             false
         );
+
+        self::$dom->addChild(
+            $valores,
+            'ValTotTributos',
+            $rps->infTotTributacao,
+            false,
+            'ValTotTributos',
+            false
+        );
+
         self::$dom->addChild(
             $valores,
             'ValorIss',
@@ -265,34 +260,10 @@ class RenderRps extends RenderRPSBase
         );
         self::$dom->addChild(
             $valores,
-            'OutrasRetencoes',
-            $rps->infOutrasRetencoes,
-            false,
-            'OutrasRetencoes',
-            false
-        );
-        self::$dom->addChild(
-            $valores,
-            'BaseCalculo',
-            $rps->infBaseCalculo,
-            false,
-            'BaseCalculo',
-            false
-        );
-        self::$dom->addChild(
-            $valores,
             'Aliquota',
             number_format($rps->infAliquota, 2, '.', ''),
             false,
             'Aliquota',
-            false
-        );
-        self::$dom->addChild(
-            $valores,
-            'ValorLiquidoNfse',
-            $rps->infValorLiquidoNfse,
-            false,
-            'ValorLiquidoNfse',
             false
         );
         self::$dom->addChild(
@@ -314,15 +285,22 @@ class RenderRps extends RenderRPSBase
         self::$dom->appChild($servico, $valores, 'Adicionando tag Valores em Servico');
         //FIM Valores
 
-        // <======= RESPONSAVEL RETENCAO AQUI =======>
-        // self::$dom->addChild(
-        //     $servico,
-        //     'ResponsavelRetencao',
-        //     $rps->infResponsavelRetencao,
-        //     false,
-        //     'ResponsavelRetencao',
-        //     false
-        // );
+        self::$dom->addChild(
+            $servico,
+            'IssRetido',
+            $rps->infIssRetido,
+            true,
+            'IssRetido',
+            false
+        );
+        self::$dom->addChild(
+            $servico,
+            'ResponsavelRetencao',
+            $rps->infResponsavelRetencao,
+            false,
+            'ResponsavelRetencao',
+            false
+        );
         self::$dom->addChild(
             $servico,
             'ItemListaServico',
@@ -341,14 +319,6 @@ class RenderRps extends RenderRPSBase
         );
         self::$dom->addChild(
             $servico,
-            'CodigoTributacaoMunicipio',
-            $rps->infCodigoTributacaoMunicipio,
-            false,
-            'CodigoTributacaoMunicipio',
-            false
-        );
-        self::$dom->addChild(
-            $servico,
             'Discriminacao',
             $rps->infDiscriminacao,
             true,
@@ -362,8 +332,39 @@ class RenderRps extends RenderRPSBase
             true,
             'CodigoMunicipio',
             false
-        );        
-
+        );  
+        self::$dom->addChild(
+            $servico,
+            'CodigoTributacaoMunicipio',
+            $rps->infCodigoTributacaoMunicipio,
+            false,
+            'CodigoTributacaoMunicipio',
+            false
+        );          
+        self::$dom->addChild(
+            $servico,
+            'CodigoPais',
+            $rps->infCodigoPais,
+            false,
+            'CodigoPais',
+            false
+        );         
+        self::$dom->addChild(
+            $servico,
+            'ExigibilidadeISS',
+            1,
+            true,
+            'ExigibilidadeISS',
+            false
+        );
+        self::$dom->addChild(
+            $servico,
+            'MunicipioIncidencia',
+            $rps->infMunicipioPrestacaoServico,
+            false,
+            'MunicipioIncidencia',
+            false
+        );
         // self::$dom->addChild(
         //     $servico,
         //     'NumeroProcesso',
@@ -377,16 +378,31 @@ class RenderRps extends RenderRPSBase
 
         /** Prestador **/
         $prestador = self::$dom->createElement('Prestador');
-        
-         //CNPJ
-         self::$dom->addChild(
-            $prestador,
-            'Cnpj',
-            $rps->infPrestador['cnpjcpf'],
-            false,
-            'Cnpj',
-            false
-        );
+
+        //Cpf/Cnpj
+        if (!empty($rps->infPrestador['cnpjcpf'])) {
+            $cpfCnpj = self::$dom->createElement('CpfCnpj');
+            if ($rps->infPrestador['tipo'] == 2) {
+                self::$dom->addChild(
+                    $cpfCnpj,
+                    'Cnpj',
+                    $rps->infPrestador['cnpjcpf'],
+                    true,
+                    'Prestador CNPJ',
+                    false
+                );
+            } else {
+                self::$dom->addChild(
+                    $cpfCnpj,
+                    'Cpf',
+                    $rps->infPrestador['cnpjcpf'],
+                    true,
+                    'Prestador CPF',
+                    false
+                );
+            }
+            self::$dom->appChild($prestador, $cpfCnpj, 'Adicionando tag CpfCnpj em Prestador');
+        }
 
         //Inscrição Municipal
         self::$dom->addChild(
@@ -623,6 +639,39 @@ class RenderRps extends RenderRPSBase
         }
         /** FIM Construção Civil **/
 
+        self::$dom->addChild(
+            $infRPS,
+            'RegimeEspecialTributacao',
+            $rps->infRegimeEspecialTributacao,
+            false,
+            'RegimeEspecialTributacao',
+            false
+        );
+        self::$dom->addChild(
+            $infRPS,
+            'OptanteSimplesNacional',
+            $rps->infOptanteSimplesNacional,
+            true,
+            'OptanteSimplesNacional',
+            false
+        );
+        self::$dom->addChild(
+            $infRPS,
+            'IncentivoFiscal',
+            $rps->infIncentivadorCultural,
+            true,
+            'IncentivoFiscal',
+            false
+        );
+        self::$dom->addChild(
+            $infRPS,
+            'InformacoesComplementares',
+            $rps->infInformacoesComplementares,
+            true,
+            'InformacoesComplementares',
+            false
+        );
+
         self::$dom->appChild($root, $infRPS, 'Adicionando tag infRPS em RPS');
         self::$dom->appChild($parent, $root, 'Adicionando tag RPS na ListaRps');
 
@@ -647,6 +696,15 @@ class RenderRps extends RenderRPSBase
             $rootNode = self::render($data, $dom, $parent);
         }
 
-       
+        //Gera o nó com a assinatura
+        $signatureNode = SignerRps::sign(
+            self::$certificate,
+            'Rps',
+            'Id',
+            self::$algorithm,
+            [false, false, null, null],
+            $dom,
+            $rootNode
+        );
     }
 }

@@ -1,12 +1,11 @@
 <?php
 
 namespace NFePHP\NFSe\Counties\M3530805;
-use NFePHP\NFSe\Models\Abrasf\Rps as RpsAbrasf;
 
 /**
  * Classe a construção do xml da NFSe para a
  * Cidade de Mogi Mirim SP
- * conforme o modelo ABRASF
+ * conforme o modelo Abrasf Simpliss
  *
  * @category  NFePHP
  * @package   NFePHP\NFSe\Counties\M3530805\Rps
@@ -14,11 +13,13 @@ use NFePHP\NFSe\Models\Abrasf\Rps as RpsAbrasf;
  * @license   http://www.gnu.org/licenses/lgpl.txt LGPLv3+
  * @license   https://opensource.org/licenses/MIT MIT
  * @license   http://www.gnu.org/licenses/gpl.txt GPLv3+
- * @author    Lucas B. Simões <lucas_development at outlook dot com>
+ * @author    Maykon da S. de Siqueira <maykon at multilig dot com dot br>
  * @link      http://github.com/nfephp-org/sped-nfse for the canonical source repository
  */
 
-class Rps extends RpsAbrasf
+use NFePHP\NFSe\Models\Simpliss\Rps as RpsModel;
+
+class Rps extends RpsModel
 {
 
 }
