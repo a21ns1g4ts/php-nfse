@@ -87,8 +87,8 @@ class RecepcionarLoteRps extends RecepcionarLoteRpsBase
             false
         );
         
-        //Adiciona a tag Prestador a consulta
-        $dom->appChild($root, $prestador, 'Adicionando tag Prestador');
+        //Adiciona a tag Prestador a loterps
+        $dom->appChild($loteRps, $prestador, 'Adicionando tag Prestador');
 
         /* Quantidade de RPSs */
         $dom->addChild(
